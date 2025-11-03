@@ -43,3 +43,13 @@ AI4Devs-intro-2510-sr/
 
 Implement the following additional feature:
 - The button should appear only when there is enough text, more than 3 letters
+
+
+### Prompt 3
+
+```
+implement the following additional feature:
+- show the output string in real time, do not depend on the button
+
+give me the full code for each file so I can do a drop-in replacement
+```

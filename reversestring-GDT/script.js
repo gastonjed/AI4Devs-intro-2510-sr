@@ -1,6 +1,7 @@
 /* Reverse String — minimal implementation with strong practices.
- * - Button only appears when input length > 3 (Unicode-aware)
- * - Pure function, no globals, accessible result
+ * - Real-time reversed output (does not depend on the button)
+ * - Button only appears when input length > 3
+ * - Pure function for logic, accessible output area
  */
 (() => {
   "use strict";
@@ -24,33 +25,37 @@
   const error = /** @type {HTMLParagraphElement} */ (document.getElementById("error"));
   const button = /** @type {HTMLButtonElement} */ (document.getElementById("submit"));
 
-  // Show/enable button only when there is enough text (> 3 characters).
-  function updateButtonState() {
-    const count = [...input.value.trim()].length; // Unicode-aware length
+  // Show/hide the button based on Unicode-aware character count (> 3).
+  function updateButtonVisibility() {
+    const count = [...(input.value ?? "")].length;
     const hasEnough = count > 3;
     button.hidden = !hasEnough;
     button.disabled = !hasEnough;
   }
-  updateButtonState();
+
+  // Update the output in real time.
+  function updateOutput() {
+    result.value = reverseString(input.value ?? "");
+  }
+
+  // Initial paint.
+  updateButtonVisibility();
+  updateOutput();
 
   input.addEventListener("input", () => {
     error.style.display = "none";
-    updateButtonState();
+    updateButtonVisibility();
+    updateOutput();
   });
 
+  // Keep the button functional, but not required.
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
-
-    const text = input.value.trim();
-    if ([...text].length <= 3) {
-      error.textContent = "Please enter at least 4 characters.";
-      error.style.display = "block";
-      result.value = "";
-      input.focus();
-      return;
-    }
-
-    result.value = reverseString(text);
+    // On submit, we just ensure output is up to date and keep focus for fast iteration.
+    updateOutput();
     input.select();
   });
+
+  // Minimal smoke test in dev tools:
+  // console.assert(reverseString("AI4Devs") === "sveD4IA", "Smoke test failed");
 })();
