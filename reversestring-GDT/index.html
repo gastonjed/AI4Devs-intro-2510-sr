@@ -39,11 +39,11 @@
           <label for="text">Text to reverse</label>
           <input id="text" name="text" type="text" inputmode="text" autocomplete="off"
                  placeholder="Type something like AI4Devs" maxlength="1000" required />
-          <p id="hint" class="hint">Press Enter or click “Reverse”.</p>
+          <p id="hint" class="hint">Enter at least 4 characters, then press Enter or click “Reverse”.</p>
         </div>
 
         <div class="row">
-          <button id="submit" type="submit" aria-describedby="hint">Reverse</button>
+          <button id="submit" type="submit" aria-describedby="hint" hidden>Reverse</button>
           <p id="error" class="error" role="alert" style="display:none"></p>
         </div>
 

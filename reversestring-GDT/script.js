@@ -1,7 +1,6 @@
 /* Reverse String — minimal implementation with strong practices.
- * - Pure function `reverseString` (no side effects)
- * - Defensive checks + tiny UX hints
- * - Accessibility: aria-live result, form semantics
+ * - Button only appears when input length > 3 (Unicode-aware)
+ * - Pure function, no globals, accessible result
  */
 (() => {
   "use strict";
@@ -9,8 +8,7 @@
   /**
    * Returns a new string with characters in reverse order.
    * Uses the spread operator to better handle Unicode code points than `split('')`.
-   * Note: complex grapheme clusters (e.g., emojis with ZWJ) are not fully normalized
-   * in this minimal solution.
+   * Note: complex grapheme clusters (e.g., emojis with ZWJ) are not fully normalized.
    * @param {string} input
    * @returns {string}
    */
@@ -26,9 +24,12 @@
   const error = /** @type {HTMLParagraphElement} */ (document.getElementById("error"));
   const button = /** @type {HTMLButtonElement} */ (document.getElementById("submit"));
 
-  // Enhance: disable button when empty (progressive; works even without this).
+  // Show/enable button only when there is enough text (> 3 characters).
   function updateButtonState() {
-    button.disabled = !input.value.trim();
+    const count = [...input.value.trim()].length; // Unicode-aware length
+    const hasEnough = count > 3;
+    button.hidden = !hasEnough;
+    button.disabled = !hasEnough;
   }
   updateButtonState();
 
@@ -40,23 +41,16 @@
   form.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
-    const text = input.value;
-    if (!text || !text.trim()) {
-      error.textContent = "Please enter some text to reverse.";
+    const text = input.value.trim();
+    if ([...text].length <= 3) {
+      error.textContent = "Please enter at least 4 characters.";
       error.style.display = "block";
       result.value = "";
       input.focus();
       return;
     }
 
-    // Core logic
-    const reversed = reverseString(text);
-    result.value = reversed;
-
-    // Optional: keep focus on input for fast iteration
+    result.value = reverseString(text);
     input.select();
   });
-
-  // Minimal smoke test in dev tools
-  // console.assert(reverseString("AI4Devs") === "sveD4IA", "Smoke test failed");
 })();

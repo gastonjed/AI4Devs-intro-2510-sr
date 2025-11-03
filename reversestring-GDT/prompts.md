@@ -38,3 +38,8 @@ AI4Devs-intro-2510-sr/
     ├── prompts.md
     └── script.js
 ```
+
+## Prompt 2
+
+Implement the following additional feature:
+- The button should appear only when there is enough text, more than 3 letters
