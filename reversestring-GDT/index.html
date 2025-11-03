@@ -1,11 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reverse String</title>    
-</head>
-<body>
-<script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Reverse String • AI4Devs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Minimal web page that reverses the order of a string using JavaScript."
+    />
+    <style>
+      /* Minimal, readable defaults */
+      :root { font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+      body { margin: 2rem; display: grid; gap: 1rem; max-width: 640px; }
+      form { display: grid; gap: .5rem; }
+      .row { display: grid; gap: .25rem; }
+      input[type="text"] { padding: .5rem .6rem; border: 1px solid #ccc; border-radius: .5rem; }
+      button { padding: .55rem .8rem; border: 1px solid #222; background: #222; color: #fff; border-radius: .5rem; cursor: pointer; }
+      button:disabled { opacity: .6; cursor: not-allowed; }
+      output, .hint { color: #333; }
+      .muted { color: #666; font-size: .9rem; }
+      .error { color: #b00020; }
+      .card { border: 1px solid #eee; border-radius: .75rem; padding: 1rem; }
+    </style>
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Reverse String</h1>
+      <p class="muted">Enter any text and get it reversed (e.g., <code>AI4Devs</code> → <code>sveD4IA</code>).</p>
+      <noscript><p class="error">JavaScript is required to run this page.</p></noscript>
+    </header>
+
+    <main class="card" role="region" aria-labelledby="form-title">
+      <form id="reverse-form" novalidate>
+        <h2 id="form-title" class="visually-hidden" style="position:absolute;left:-9999px">Reverse a string</h2>
+
+        <div class="row">
+          <label for="text">Text to reverse</label>
+          <input id="text" name="text" type="text" inputmode="text" autocomplete="off"
+                 placeholder="Type something like AI4Devs" maxlength="1000" required />
+          <p id="hint" class="hint">Press Enter or click “Reverse”.</p>
+        </div>
+
+        <div class="row">
+          <button id="submit" type="submit" aria-describedby="hint">Reverse</button>
+          <p id="error" class="error" role="alert" style="display:none"></p>
+        </div>
+
+        <div class="row">
+          <label for="result" class="muted">Result</label>
+          <output id="result" aria-live="polite"></output>
+        </div>
+      </form>
+    </main>
+
+    <footer class="muted">
+      <p>Built for AI4Devs intro exercise.</p>
+    </footer>
+  </body>
 </html>
