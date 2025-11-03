@@ -53,3 +53,10 @@ implement the following additional feature:
 
 give me the full code for each file so I can do a drop-in replacement
 ```
+
+### Prompt 4
+
+```
+the reverse button now does not make any sense. Please, remove it completelly
+```
+
