@@ -1,5 +1,5 @@
 /* Reverse String — minimal implementation with strong practices.
- * - Real-time reversed output (no button)
+ * - Real-time reversed output, only shown when input length > 3
  * - Pure function for logic, accessible output area
  */
 (() => {
@@ -17,13 +17,27 @@
     return [...input].reverse().join("");
   }
 
+  /**
+   * Counts characters in a Unicode-aware way (code points).
+   * @param {string} s
+   * @returns {number}
+   */
+  function lengthUnicode(s) {
+    return [...(s ?? "")].length;
+  }
+
   // Cache DOM references once.
   const input = /** @type {HTMLInputElement} */ (document.getElementById("text"));
   const result = /** @type {HTMLOutputElement} */ (document.getElementById("result"));
 
-  // Update the output in real time.
+  // Update the output in real time, but only if length > 3.
   function updateOutput() {
-    result.value = reverseString(input.value ?? "");
+    const value = input.value ?? "";
+    if (lengthUnicode(value) > 3) {
+      result.value = reverseString(value);
+    } else {
+      result.value = ""; // hide by clearing when not enough characters
+    }
   }
 
   // Initial paint + live updates.

@@ -60,3 +60,9 @@ give me the full code for each file so I can do a drop-in replacement
 the reverse button now does not make any sense. Please, remove it completelly
 ```
 
+### Prompt 5
+
+```
+modify it so the output only is shown (in real time) if lenght is greater than 3 chars
+```
+
